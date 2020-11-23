@@ -8,25 +8,32 @@
 <div class="border backgroundWhite">
     <div class="row">
         <div class="col-6">
-            <h2 class="text-info">Categort List</h2>
+            <h2 class="text-info">Customer List</h2>
         </div>
         <div class="col-6 text-lg-right">
             <partial name="_CreateButtonPartial"  />
         </div>
     </div>
     <br />
+
+@*Things to Add: 1. Filter Fucntion
+                 2. theme
+                 3. Back to Dashboard button*@
     <div>
         @if (Model.Count() > 0)
         { 
            <table class="table table-striped border">
                <tr class="table-secondary">
-
-                   <th>
-                       @Html.DisplayNameFor(m => m.FName)
-                   </th>
                    <th>
                        @Html.DisplayNameFor(m => m.Id)
                    </th>
+                   <th>
+                       First Name
+                   </th>
+                   <th>
+                       Last Name
+                   </th>
+
                    <th></th>
                </tr>
                
@@ -34,11 +41,15 @@
             @foreach (var item in Model) {
            <tr>
 
+
+               <td>
+                   @Html.DisplayFor(m => item.Id)
+               </td>
                <td>
                    @Html.DisplayFor(m => item.FName)
                </td>
                <td>
-                   @Html.DisplayFor(m => item.Id)
+                   @Html.DisplayFor(m => item.LName)
                </td>
                <td>
                    <partial name="_TableButtonPartial" model="item.Id" />

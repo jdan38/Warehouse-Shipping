@@ -1,34 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Warehouse.Data;
+using Warehouse.Models;
 
-namespace Warehouse.Areas.Inventory.Controllers
+namespace Warehouse.Areas.Controllers
 {
     [Area("Inventory")]
-
-      public class InventoryController : Controller
+    public class InventoryController : Controller
     {
         private readonly ApplicationDbContext _db;
-
         public InventoryController(ApplicationDbContext db)
         {
-            _db = db; 
+            _db = db;
         }
 
-
-
-    // GET
-    public async Task<IActionResult> Index()
+        //Get 
+        public async Task<IActionResult> Index()
         {
+
             return View(await _db.Inventory.ToListAsync());
         }
 
-        // GET: InventoryController/Details/5
+        // Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,27 +37,27 @@ namespace Warehouse.Areas.Inventory.Controllers
             return View(inventory);
         }
 
-        // Create
-        public IActionResult Create()
+        //Create
+        public ActionResult Create()
         {
             return View();
         }
 
         // POST: InventoryController/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create(InventoryController inventory)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _db.Inventory.Add(inventory);
-        //        await _db.SaveChangesAsync();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Inventory inventory)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Inventory.Add(inventory);
+                await _db.SaveChangesAsync();
 
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(inventory);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(inventory);
 
-        //}
+        }
 
         // GET/Edit/
         public async Task<IActionResult> Edit(int? id)
@@ -80,40 +74,51 @@ namespace Warehouse.Areas.Inventory.Controllers
             return View(inventory);
         }
 
-        // POST: InventoryController/Edit/5
+        // POST/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id, Inventory inventory)
         {
-            try
+            if (ModelState.IsValid)
             {
+                _db.Inventory.Update(inventory);
+                await _db.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(inventory);
         }
 
-        // GET: InventoryController/Delete/5
-        public ActionResult Delete(int id)
+        // GET/Delete
+        public async Task<ActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var inventory = await _db.Inventory.FindAsync(id);
+            if (inventory == null)
+            {
+                return NotFound();
+            }
+            return View(inventory);
         }
 
-        // POST: InventoryController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, Inventory inventory)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        // POST/Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var inventory = await _db.Inventory.FindAsync(id);
+
+            if (inventory == null)
+            {
+                return NotFound();
+            }
+            _db.Inventory.Remove(inventory);
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

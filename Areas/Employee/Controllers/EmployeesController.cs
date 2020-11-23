@@ -6,11 +6,11 @@ using Warehouse.Models;
 
 namespace Warehouse.Areas.Controllers
 {
-    [Area("Customer")]
-    public class CustomerController : Controller
+    [Area("Employee")]
+    public class EmployeesController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public CustomerController(ApplicationDbContext db)
+        public EmployeesController(ApplicationDbContext db)
         {
             _db = db;
         }
@@ -19,22 +19,22 @@ namespace Warehouse.Areas.Controllers
         public async Task<IActionResult> Index()
         {
 
-            return View(await _db.Customer.ToListAsync());
+            return View(await _db.Employee.ToListAsync());
         }
 
-        // Details
+       // Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var customer = await _db.Customer.FindAsync(id);
-            if (customer == null)
+            var employee = await _db.Category.FindAsync(id);
+            if (employee == null)
             {
                 return NotFound();
             }
-            return View(customer);
+            return View(employee);
         }
 
         //Create
@@ -46,62 +46,62 @@ namespace Warehouse.Areas.Controllers
         // POST: InventoryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Customer customer)
+        public async Task<IActionResult> Create(Employee employee)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
-                _db.Customer.Add(customer);
+                _db.Employee.Add(employee);
                 await _db.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(customer);
-
+            return View(employee);
+           
         }
 
         // GET/Edit/
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if(id==null)
             {
                 return NotFound();
             }
-            var customer = await _db.Customer.FindAsync(id);
-            if (customer == null)
+            var employee = await _db.Employee.FindAsync(id);
+            if(employee == null)
             {
                 return NotFound();
             }
-            return View(customer);
+            return View(employee);
         }
 
         // POST/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, Customer customer)
+        public async Task<ActionResult> Edit(int id, Employee employee)
         {
             if (ModelState.IsValid)
             {
-                _db.Customer.Update(customer);
+                _db.Employee.Update(employee);
                 await _db.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(customer);
+            return View(employee);
         }
 
         // GET/Delete
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
+            if(id==null)
             {
                 return NotFound();
             }
-            var customer = await _db.Customer.FindAsync(id);
-            if (customer == null)
+            var employee = await _db.Employee.FindAsync(id);
+            if(employee == null)
             {
                 return NotFound();
             }
-            return View(customer);
+            return View(employee);
         }
 
         // POST/Delete
@@ -109,13 +109,13 @@ namespace Warehouse.Areas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customer = await _db.Customer.FindAsync(id);
+            var category = await _db.Category.FindAsync(id);
 
-            if (customer == null)
+            if(category == null)
             {
                 return NotFound();
             }
-            _db.Customer.Remove(customer);
+            _db.Category.Remove(category);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

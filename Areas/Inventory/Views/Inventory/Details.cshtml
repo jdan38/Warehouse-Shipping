@@ -5,38 +5,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<br />
+<h2 class="text-info">Inventory Details</h2>
+<hr />
 
-<div>
-    <h4>Inventory</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IvenId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IvenId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ItemName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ItemName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Qyt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Qyt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-    </dl>
-</div>
-<div>
-   <partial name="_DeleteAndBackToListButton" />
-</div>
+
+<form method="post" asp-action="Details">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="IvenId" class="control-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="IvenId" class="form-control" disabled />
+            </div>
+            <span asp-validation-for="IvenId" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="ItemName" class="control-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="ItemName" class="form-control" disabled />
+            </div>
+            <span asp-validation-for="ItemName" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Qyt" class="control-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Qyt" class="form-control" disabled />
+            </div>
+            <span asp-validation-for="Qyt" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Price" class="control-label"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Price" class="form-control" disabled />
+            </div>
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <div class="row">
+                    <partial name="_DetailsAndBackToListButton" model="Model.IvenId" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

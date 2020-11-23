@@ -78,6 +78,10 @@ body {
     background: url('../images/dust_scratches.png');
 }
 
+.search-backgroud2 {
+    background: url('../images/ReadyForPickup.png');
+}
+
 
 .backgroundWhite {
     background-color: white;
