@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Warehouse.Models.Category>
+﻿@model IEnumerable<Warehouse.Models.Customer>
 
 @{
     ViewData["Title"] = "Index";
@@ -22,7 +22,7 @@
                <tr class="table-secondary">
 
                    <th>
-                       @Html.DisplayNameFor(m => m.CatName)
+                       @Html.DisplayNameFor(m => m.FName)
                    </th>
                    <th>
                        @Html.DisplayNameFor(m => m.Id)
@@ -35,7 +35,7 @@
            <tr>
 
                <td>
-                   @Html.DisplayFor(m => item.CatName)
+                   @Html.DisplayFor(m => item.FName)
                </td>
                <td>
                    @Html.DisplayFor(m => item.Id)

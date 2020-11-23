@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Warehouse.Data;
 
 namespace Warehouse.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201121190601_addCustomerViewsandController")]
+    partial class addCustomerViewsandController
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,41 +270,6 @@ namespace Warehouse.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customer");
-                });
-
-            modelBuilder.Entity("Warehouse.Models.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("EAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ECity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EState")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EZip")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EfName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ElName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("Warehouse.Models.Inventory", b =>

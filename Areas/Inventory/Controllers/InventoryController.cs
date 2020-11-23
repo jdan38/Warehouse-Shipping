@@ -4,55 +4,86 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Warehouse.Data;
 
 namespace Warehouse.Areas.Inventory.Controllers
 {
     [Area("Inventory")]
-    public class InventoryController : Controller
+
+      public class InventoryController : Controller
     {
-        // GET: InventoryController
-        public ActionResult Index()
+        private readonly ApplicationDbContext _db;
+
+        public InventoryController(ApplicationDbContext db)
         {
-            return View();
+            _db = db; 
+        }
+
+
+
+    // GET
+    public async Task<IActionResult> Index()
+        {
+            return View(await _db.Inventory.ToListAsync());
         }
 
         // GET: InventoryController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var inventory = await _db.Inventory.FindAsync(id);
+            if (inventory == null)
+            {
+                return NotFound();
+            }
+            return View(inventory);
         }
 
-        // GET: InventoryController/Create
-        public ActionResult Create()
+        // Create
+        public IActionResult Create()
         {
             return View();
         }
 
         // POST: InventoryController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(InventoryController inventory)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _db.Inventory.Add(inventory);
+        //        await _db.SaveChangesAsync();
 
-        // GET: InventoryController/Edit/5
-        public ActionResult Edit(int id)
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(inventory);
+
+        //}
+
+        // GET/Edit/
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var inventory = await _db.Inventory.FindAsync(id);
+            if (inventory == null)
+            {
+                return NotFound();
+            }
+            return View(inventory);
         }
 
         // POST: InventoryController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id)
         {
             try
             {
@@ -71,18 +102,18 @@ namespace Warehouse.Areas.Inventory.Controllers
         }
 
         // POST: InventoryController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, Inventory inventory)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
