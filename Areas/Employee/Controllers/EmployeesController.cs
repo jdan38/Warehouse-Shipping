@@ -19,7 +19,7 @@ namespace Warehouse.Areas.Controllers
         public async Task<IActionResult> Index()
         {
 
-            return View(await _db.Employee.ToListAsync());
+            return View(await _db.Employees.ToListAsync());
         }
 
        // Details
@@ -29,7 +29,7 @@ namespace Warehouse.Areas.Controllers
             {
                 return NotFound();
             }
-            var employee = await _db.Category.FindAsync(id);
+            var employee = await _db.Employees.FindAsync(id);
             if (employee == null)
             {
                 return NotFound();
@@ -50,7 +50,7 @@ namespace Warehouse.Areas.Controllers
         {
             if(ModelState.IsValid)
             {
-                _db.Employee.Add(employee);
+                _db.Employees.Add(employee);
                 await _db.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
@@ -66,7 +66,7 @@ namespace Warehouse.Areas.Controllers
             {
                 return NotFound();
             }
-            var employee = await _db.Employee.FindAsync(id);
+            var employee = await _db.Employees.FindAsync(id);
             if(employee == null)
             {
                 return NotFound();
@@ -81,7 +81,7 @@ namespace Warehouse.Areas.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Employee.Update(employee);
+                _db.Employees.Update(employee);
                 await _db.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
@@ -96,7 +96,7 @@ namespace Warehouse.Areas.Controllers
             {
                 return NotFound();
             }
-            var employee = await _db.Employee.FindAsync(id);
+            var employee = await _db.Employees.FindAsync(id);
             if(employee == null)
             {
                 return NotFound();
@@ -109,13 +109,13 @@ namespace Warehouse.Areas.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _db.Category.FindAsync(id);
+            var category = await _db.Employees.FindAsync(id);
 
             if(category == null)
             {
                 return NotFound();
             }
-            _db.Category.Remove(category);
+            _db.Employees.Remove(category);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

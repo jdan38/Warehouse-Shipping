@@ -17,6 +17,11 @@ namespace Warehouse.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
         public DbSet<Customer> Customer { get; set; }
-        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        //public DbSet<SubCategory> SubCategory { get; set; }
+        public DbSet<MenuItem> MenuItem { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Coupon> Coupon { get; set; }
+
     }
 }

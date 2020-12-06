@@ -1,0 +1,84 @@
+﻿@model Warehouse.Models.Employee
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">Category Details</h2>
+<hr />
+
+<form asp-action="Details">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="EfName" class="control-label">First Name</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="EfName" class="form-control" disabled />
+            </div>
+            <span asp-validation-for="EfName" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="ElName" class="control-label">Last Name</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="ElName" class="form-control" disabled />
+            </div>
+            <span asp-validation-for="ElName" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="EAddress" class="control-label">Address</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="EAddress" class="form-control" disabled />
+            </div>
+            <span asp-validation-for="EAddress" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="ECity" class="control-label">City</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="ECity" class="form-control" disabled />
+            </div>
+            <span asp-validation-for="ECity" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="EState" class="control-label">State</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="EState" class="form-control" disabled />
+            </div>
+            <span asp-validation-for="EState" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="EZip" class="control-label">Zipcode</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="EZip" class="form-control" disabled />
+            </div>
+            <span asp-validation-for="EZip" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="EEmail" class="control-label">Email Address</label>
+            </div>
+            <div class="col-5">
+                <input asp-for="EEmail" class="form-control" disabled />
+            </div>
+            <span asp-validation-for="EEmail" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <partial name="_DetailsAndBacktoListButton" model="Model.Id" />
+            </div>
+        </div>
+    </div>
+</form>

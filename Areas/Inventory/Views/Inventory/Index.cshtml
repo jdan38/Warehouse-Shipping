@@ -24,10 +24,10 @@
                     <tr class="table-secondary">
 
                         <th>
-                            @Html.DisplayNameFor(m => m.ItemName)
+                            @Html.DisplayNameFor(m => m.IvenId)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(m => m.IvenId)
+                            @Html.DisplayNameFor(m => m.ItemName)
                         </th>
                         <th>
                             @Html.DisplayNameFor(m => m.Qyt)
@@ -44,10 +44,10 @@
                 <tr>
 
                     <td>
-                        @Html.DisplayFor(m => item.ItemName)
+                        @Html.DisplayFor(m => item.IvenId)
                     </td>
                     <td>
-                        @Html.DisplayFor(m => item.IvenId)
+                        @Html.DisplayFor(m => item.ItemName)
                     </td>
                     <td>
                         @Html.DisplayFor(m => item.Qyt)
@@ -64,7 +64,7 @@
             }
             else
             {
-                <p>No category exists...</p>
+                <p>No Inventory Items exists...</p>
             }
         </div>
     </div>
