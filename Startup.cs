@@ -12,6 +12,8 @@ using Warehouse.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Warehouse.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Warehouse
 {
@@ -30,10 +32,32 @@ namespace Warehouse
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>() /*options => options.SignIn.RequireConfirmedAccount = true*/
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddDefaultTokenProviders()/*options => options.SignIn.RequireConfirmedAccount = true*/
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddSingleton<IEmailSender, EmailSender>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+
+                options.LoginPath = $"/Identity/Account/Login";
+
+                options.LogoutPath = $"/Identity/Account/Logout";
+
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
+            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
+
+            services.AddSession(options =>
+            {
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +76,8 @@ namespace Warehouse
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();

@@ -1,11 +1,14 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Warehouse.Data;
 using Warehouse.Models;
+using Warehouse.Utility;
 
 namespace Warehouse.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.ManagerUser)]
     [Area("Admin")]
     public class CategoryController : Controller
     {

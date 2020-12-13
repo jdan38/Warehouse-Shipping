@@ -13,6 +13,10 @@
 
 //namespace Warehouse.Areas.Admin.Controllers
 //{
+//using Microsoft.AspNetCore.Authorization;
+//using Warehouse.Utility;
+
+//        [Authorize(Roles = SD.ManagerUser)]
 //    [Area("Admin")]
 //    //[Authorize(Roles = SD.ManagerUser)]
 //    public class SubCategoryController : Controller

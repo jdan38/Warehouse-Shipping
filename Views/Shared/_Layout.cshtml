@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Warehouse.Utility
+@using Microsoft.AspNetCore.Http
+
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Warehouse.AspNetCore</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/b279086192.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/css/site.css" />
     <style>
 
@@ -59,7 +66,6 @@
 
         #log {
             padding-top: 35em;
-      
     </style>
 </head>
 
@@ -70,7 +76,26 @@
 
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="Admin" asp-controller="Home" asp-action="Index">Warehouse Application</a>
+
+                <a class="navbar-brand" style="padding-right:30em;" asp-area="Customer" asp-controller="Home" asp-action="Index">Warehouse Application</a>
+                @*@if (HttpContextAccessor.HttpContext.Session.GetInt32("ssCarCount") != null)
+                {
+                    <div style="color:black">
+                        <a href="#" class="nav-link">
+                            @{ 
+                                var count = HttpContextAccessor.HttpContext.Session.GetInt32("SD.ssShoppingCartCount");
+                            }
+                            <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                        </a>
+                    </div>
+                                }
+                                else
+                                {*@ 
+                <div style="color:black">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-shopping-cart"></i> &nbsp; (0)
+                    </a>
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -78,41 +103,44 @@
 
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <div class="sidenav">
-                    
+
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Index">Dashboard</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Employee" asp-controller="Employees" asp-action="Index">Employee List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Customer" asp-action="Index">Customer List</a>
-                        </li>
-                        @*<li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="Index">Shopping Cart</a>
-                            </li>*@
+                        @if (User.IsInRole(SD.ManagerUser))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Employee" asp-controller="Employees" asp-action="Index">Employee List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Customer" asp-controller="Customer" asp-action="Index">Customer List</a>
+                            </li>
+                            @*<li class="nav-item">
+                        <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="Index">Shopping Cart</a>
+                    </li>*@
 
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Inventory" asp-controller="Inventory" asp-action="Index">Inventory List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Admin" asp-controller="MenuItem" asp-action="Index">Menu Items</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Category" asp-action="Index">Categort List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Admin" asp-controller="SubCategory" asp-action="Index">SubCategort List</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Coupon" asp-action="Index">Coupon List</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Inventory" asp-controller="Inventory" asp-action="Index">Inventory List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="MenuItem" asp-action="Index">Menu Items</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Category" asp-action="Index">Categort List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="User" asp-action="Index">Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Coupon" asp-action="Index">Coupon List</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <div id="log">
                                 <partial name="_LoginPartial" />
                             </div>
                         </li>
-                  
+
 
                     </div>
                 </div>
