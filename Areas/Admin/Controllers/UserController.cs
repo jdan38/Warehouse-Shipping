@@ -11,8 +11,8 @@ using Warehouse.Utility;
 
 namespace Warehouse.Areas.Admin.Controllers
 {
-    [Authorize(Roles = SD.ManagerUser)]
     [Area("Admin")]
+    [Authorize(Roles = SD.ManagerUser)]
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -21,24 +21,26 @@ namespace Warehouse.Areas.Admin.Controllers
         {
             _db = db;
         }
+
         public async Task<IActionResult> Index()
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            return View(await _db.ApplicationUsers.Where(u=>u.Id != claim.Value).ToListAsync());
+            return View(await _db.ApplicationUser.Where(u => u.Id != claim.Value).ToListAsync());
         }
+
 
         public async Task<IActionResult> Lock(string id)
         {
-            if(id==null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var applicationUser = await _db.ApplicationUsers.FirstOrDefaultAsync(m => m.Id == id);
+            var applicationUser = await _db.ApplicationUser.FirstOrDefaultAsync(m => m.Id == id);
 
-            if(applicationUser == null)
+            if (applicationUser == null)
             {
                 return NotFound();
             }
@@ -57,7 +59,7 @@ namespace Warehouse.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var applicationUser = await _db.ApplicationUsers.FirstOrDefaultAsync(m => m.Id == id);
+            var applicationUser = await _db.ApplicationUser.FirstOrDefaultAsync(m => m.Id == id);
 
             if (applicationUser == null)
             {

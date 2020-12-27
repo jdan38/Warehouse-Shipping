@@ -1,4 +1,4 @@
-﻿@*@model Warehouse.Models.ViewModels.SubCategoryAndCategoryViewModel
+﻿@model Warehouse.Models.ViewModels.SubCategoryAndCategoryViewModel
 @using Warehouse.Extensions
 
 @{
@@ -38,7 +38,7 @@
                 <span asp-validation-for="SubCategory.SName" class="text-danger"></span>
             </div>
             <div class="form-group row">
-                <div class="col-5 offset-3">
+                <div class="col-6 offset-2">
                     <partial name="_EditAndBackToListButton" model="Model.SubCategory.Id" />
                 </div>
             </div>
@@ -87,4 +87,4 @@
     </script>
 
 
-}*@
+}

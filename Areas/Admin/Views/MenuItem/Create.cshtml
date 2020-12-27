@@ -18,7 +18,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="MenuItem.Name" class="control-label"></label>
+                <label asp-for="MenuItem.Name" class="col-form-label"></label>
             </div>
             <div class="col-5">
                 <input asp-for="MenuItem.Name" class="form-control" />
@@ -27,7 +27,7 @@
         </div>
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="MenuItem.Description" class="control-label"></label>
+                <label asp-for="MenuItem.Description" class="col-form-label"></label>
             </div>
             <div class="col-5">
                 @Html.TextAreaFor(m => m.MenuItem.Description)
@@ -36,7 +36,7 @@
         </div>
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="MenuItem.Price" class="control-label"></label>
+                <label asp-for="MenuItem.Price" class="col-form-label"></label>
             </div>
             <div class="col-5">
                 <input asp-for="MenuItem.Price" class="form-control" />
@@ -45,12 +45,13 @@
         </div>
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="MenuItem.Image" class="control-label"></label>
+                <label asp-for="MenuItem.Image" class="col-form-label"></label>
             </div>
             <div class="col-5">
                 <input type="file" name="files" multiple class="form-control" />
             </div>
         </div>
+
         <div class="form-group row">
             <div class="col-2">
                 <label asp-for="MenuItem.CategoryId" class="col-form-label"></label>
@@ -59,17 +60,17 @@
                 <select asp-for="@Model.MenuItem.CategoryId" id="CategoryId" asp-items="Model.Category.ToSelectListItem(Model.MenuItem.CategoryId)" class="form-control"></select>
             </div>
         </div>
-        @*<div class="form-group row">
+        <div class="form-group row">
             <div class="col-2">
                 <label asp-for="MenuItem.SubCategoryId" class="col-form-label"></label>
             </div>
             <div class="col-5">
-                <select asp-for="@Model.MenuItem.SubCategoryId" name="SubCategory" id="SubCategoryId" asp-items="@(new SelectList(string.Empty,"Id","Name"))" class="form-control"></select>
+                <select asp-for="@Model.MenuItem.SubCategoryId" name="SubCategoryId" id="SubCategoryId" asp-items="@(new SelectList(string.Empty,"Id","Name"))" class="form-control"></select>
             </div>
-        </div>*@
+        </div>
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="MenuItem.Ratings" class="control-label"></label>
+                <label asp-for="MenuItem.Ratings" class="col-form-label"></label>
             </div>
             <div class="col-5">
                 <select asp-for="MenuItem.Ratings" asp-items="Html.GetEnumSelectList<MenuItem.Rate>()" class="form-control"></select>
@@ -94,6 +95,7 @@
         });
     </script>
 
+    @*didn't work went with vanilla javascript*@
     @*<script type="text/javascript">
         $(document).ready(function () {
             getSubCategory();
@@ -107,14 +109,48 @@
             var ddlsoruce = '#CategoryId';
             $.getJSON(url, { id: $(ddlsoruce).val() }, function (data) {
                 var items = '';
-            } $('#SubCategoryId').empty();
+            $('#SubCategoryId').empty();
             $.each(data, function (i, subcategory) {
                 items += "<option value='" + subcategory.value + "'>" + subcategory.text + "</option>";
             });
+
             $('#SubCategoryId').html(items);
         })
-      }*@
-    @*</script>*@
+      }
+    </script>*@
+
+    <script type="text/javascript">
+        let categorySelected = document.querySelector("#CategoryId");
+        let subCategorySelected = document.querySelector("#SubCategoryId");
+
+        function getSubCategory() {
+            fetch('/Admin/SubCategory/GetSubCategory/' + categorySelected.value)
+                .then(function (response) {
+                    // The API call was successful!
+                    return response.json();
+                }).then(function (data) {
+                    // This is the JSON from our response
+                    subCategorySelected.textContent = '';
+                    for (i in data) {
+                        let optionSubCat = document.createElement('option');
+                        optionSubCat.value = data[i].value;
+                        optionSubCat.textContent = data[i].text;
+
+                        subCategorySelected.appendChild(optionSubCat);
+                    }
+
+                }).catch(function (err) {
+                    // if There was an error
+                    console.warn('oops Something went wrong.', err);
+                });
+        }
+
+
+        window.addEventListener('load', getSubCategory);
+        categorySelected.addEventListener('change', getSubCategory);
+
+    </script>
+
 
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

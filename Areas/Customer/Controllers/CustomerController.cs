@@ -43,21 +43,21 @@ namespace Warehouse.Areas.Controllers
             return View();
         }
 
-        // POST: InventoryController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Customer.Add(customer);
-                await _db.SaveChangesAsync();
+        //// POST: InventoryController/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(Customer customer)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _db.Customer.Add(customer);
+        //        await _db.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
-            }
-            return View(customer);
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(customer);
 
-        }
+        //}
 
         // GET/Edit/
         public async Task<IActionResult> Edit(int? id)
@@ -74,20 +74,20 @@ namespace Warehouse.Areas.Controllers
             return View(customer);
         }
 
-        // POST/Edit
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Customer.Update(customer);
-                await _db.SaveChangesAsync();
+        //// POST/Edit
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Edit(int id, Customer customer)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _db.Customer.Update(customer);
+        //        await _db.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
-            }
-            return View(customer);
-        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(customer);
+        //}
 
         // GET/Delete
         public async Task<ActionResult> Delete(int? id)

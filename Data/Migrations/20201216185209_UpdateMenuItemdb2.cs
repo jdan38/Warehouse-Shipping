@@ -2,7 +2,7 @@
 
 namespace Warehouse.Data.Migrations
 {
-    public partial class AddSubCatToDatabase4 : Migration
+    public partial class UpdateMenuItemdb2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

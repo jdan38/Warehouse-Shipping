@@ -8,24 +8,20 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Warehouse.Data;
 using Warehouse.Models;
 using Warehouse.Models.ViewModels;
 using Warehouse.Utility;
 
-namespace Warehouse.Controllers
+namespace Spice.Controllers
 {
     [Area("Customer")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
 
-       
         public HomeController(ApplicationDbContext db)
         {
-          
             _db = db;
         }
 
@@ -33,10 +29,12 @@ namespace Warehouse.Controllers
         {
             IndexViewModel IndexVM = new IndexViewModel()
             {
-                MenuItem = await _db.MenuItem.Include(m => m.Category)/*.Include(m => m.SubCategory)*/.ToListAsync(),
+                MenuItem = await _db.MenuItem.Include(m => m.Category).Include(m => m.SubCategory).ToListAsync(),
                 Category = await _db.Category.ToListAsync(),
                 Coupon = await _db.Coupon.Where(c => c.IsActive == true).ToListAsync()
+
             };
+
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
@@ -46,13 +44,14 @@ namespace Warehouse.Controllers
                 HttpContext.Session.SetInt32(SD.ssShoppingCartCount, cnt);
             }
 
+
             return View(IndexVM);
         }
 
         [Authorize]
         public async Task<IActionResult> Details(int id)
         {
-            var menuItemFromDb = await _db.MenuItem.Include(m => m.Category)/*.Include(m => m.SubCategory).Where(m = m.Id == id)*/.FirstOrDefaultAsync();
+            var menuItemFromDb = await _db.MenuItem.Include(m => m.Category).Include(m => m.SubCategory).Where(m => m.Id == id).FirstOrDefaultAsync();
 
             ShoppingCart cartObj = new ShoppingCart()
             {
@@ -63,21 +62,23 @@ namespace Warehouse.Controllers
             return View(cartObj);
         }
 
+
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Details(ShoppingCart CartObject)
         {
             CartObject.Id = 0;
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 var claimsIdentity = (ClaimsIdentity)this.User.Identity;
                 var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
                 CartObject.ApplicationUserId = claim.Value;
 
-                ShoppingCart cartFromDb = await _db.ShoppingCart.Where(c => c.ApplicationUserId == CartObject.ApplicationUserId && c.MenuItemId == CartObject.MenuItemId).FirstOrDefaultAsync();
+                ShoppingCart cartFromDb = await _db.ShoppingCart.Where(c => c.ApplicationUserId == CartObject.ApplicationUserId
+                                                && c.MenuItemId == CartObject.MenuItemId).FirstOrDefaultAsync();
 
-                if (cartFromDb == null)
+                if(cartFromDb == null)
                 {
                     await _db.ShoppingCart.AddAsync(CartObject);
                 }
@@ -91,11 +92,11 @@ namespace Warehouse.Controllers
                 HttpContext.Session.SetInt32(SD.ssShoppingCartCount, count);
 
                 return RedirectToAction("Index");
-
             }
             else
             {
-                var menuItemFromDb = await _db.MenuItem.Include(m => m.Category)/*.Include(m => m.SubCategory).Where(m = m.Id == id)*/.FirstOrDefaultAsync();
+
+                var menuItemFromDb = await _db.MenuItem.Include(m => m.Category).Include(m => m.SubCategory).Where(m => m.Id == CartObject.MenuItemId).FirstOrDefaultAsync();
 
                 ShoppingCart cartObj = new ShoppingCart()
                 {
@@ -104,7 +105,6 @@ namespace Warehouse.Controllers
                 };
 
                 return View(cartObj);
-
             }
         }
 
@@ -112,7 +112,10 @@ namespace Warehouse.Controllers
 
 
 
-
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

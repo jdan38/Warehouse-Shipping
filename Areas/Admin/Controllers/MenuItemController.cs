@@ -21,7 +21,7 @@ namespace Warehouse.Areas.Admin.Controllers
         private readonly ApplicationDbContext _db;
         private readonly IWebHostEnvironment _hostingEnvironment;
         
-
+        [BindProperty]
         public MenuItemViewModel MenuItemVM { get; set; }
        
 
@@ -32,12 +32,12 @@ namespace Warehouse.Areas.Admin.Controllers
             MenuItemVM = new MenuItemViewModel()
             {
                 Category = _db.Category,
-                MenuItem = new MenuItem()
+                MenuItem = new Models.MenuItem()
             };
         }
         public async Task<IActionResult> Index()
         {
-            var menuItems = await _db.MenuItem.Include(m=>m.Category)/*.Include(m=>m.SubCategory)*/.ToListAsync();
+            var menuItems = await _db.MenuItem.Include(m=>m.Category).Include(m => m.SubCategory).ToListAsync();
             return View(menuItems);
         }
 
@@ -51,7 +51,8 @@ namespace Warehouse.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePOST()
         {
-            //MenuItemVM.MenuItem.SubCategoryId = Convert.ToInt32(Request.Form["SubCategoryId"].ToString());
+            MenuItemVM.MenuItem.SubCategoryId = Convert.ToInt32(Request.Form["SubCategoryId"].ToString());
+
 
             if (!ModelState.IsValid)
             {
@@ -61,7 +62,7 @@ namespace Warehouse.Areas.Admin.Controllers
             _db.MenuItem.Add(MenuItemVM.MenuItem);
             await _db.SaveChangesAsync();
 
-            //Work on the image saving section
+            // image saving section
 
             string webRootPath = _hostingEnvironment.WebRootPath;
             var files = HttpContext.Request.Form.Files;
@@ -100,8 +101,8 @@ namespace Warehouse.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            MenuItemVM.MenuItem = await _db.MenuItem.Include(m => m.Category)/*.Include(m => m.SubCategory)*/.SingleOrDefaultAsync(m => m.Id == id);
-            //MenuItemVM.SubCategory = await _db.SubCategory.Where(s => s.CategoryId == MenuItemVM.MenuItem.CategoryId).ToListAsync();
+            MenuItemVM.MenuItem = await _db.MenuItem.Include(m => m.Category).Include(m => m.SubCategory).SingleOrDefaultAsync(m => m.Id == id);
+            MenuItemVM.SubCategory = await _db.SubCategory.Where(s => s.CategoryId == MenuItemVM.MenuItem.CategoryId).ToListAsync();
 
             if (MenuItemVM.MenuItem == null)
             {
@@ -118,13 +119,13 @@ namespace Warehouse.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            //MenuItemVM.MenuItem.SubCategoryId = Convert.ToInt32(Request.Form["SubCategoryId"].ToString());
+            MenuItemVM.MenuItem.SubCategoryId = Convert.ToInt32(Request.Form["SubCategoryId"].ToString());
 
-            //if (!ModelState.IsValid)
-            //{
-            //    MenuItemVM.SubCategory = await _db.SubCategory.Where(s => s.CategoryId == MenuItemVM.MenuItem.CategoryId).ToListAsync();
-            //    return View(MenuItemVM);
-            //}
+            if (!ModelState.IsValid)
+            {
+                MenuItemVM.SubCategory = await _db.SubCategory.Where(s => s.CategoryId == MenuItemVM.MenuItem.CategoryId).ToListAsync();
+                return View(MenuItemVM);
+            }
 
             //Work on the image saving section
 
@@ -160,7 +161,7 @@ namespace Warehouse.Areas.Admin.Controllers
             menuItemFromDb.Price = MenuItemVM.MenuItem.Price;
             menuItemFromDb.Ratings = MenuItemVM.MenuItem.Ratings;
             menuItemFromDb.CategoryId = MenuItemVM.MenuItem.CategoryId;
-            //menuItemFromDb.SubCategoryId = MenuItemVM.MenuItem.SubCategoryId;
+            menuItemFromDb.SubCategoryId = MenuItemVM.MenuItem.SubCategoryId;
 
             await _db.SaveChangesAsync();
 
@@ -175,7 +176,7 @@ namespace Warehouse.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            MenuItemVM.MenuItem = await _db.MenuItem.Include(m => m.Category)/*.Include(m => m.SubCategory)*/.SingleOrDefaultAsync(m => m.Id == id);
+            MenuItemVM.MenuItem = await _db.MenuItem.Include(m => m.Category).Include(m => m.SubCategory).SingleOrDefaultAsync(m => m.Id == id);
 
             if (MenuItemVM.MenuItem == null)
             {
@@ -193,7 +194,7 @@ namespace Warehouse.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            MenuItemVM.MenuItem = await _db.MenuItem.Include(m => m.Category)/*.Include(m => m.SubCategory)*/.SingleOrDefaultAsync(m => m.Id == id);
+            MenuItemVM.MenuItem = await _db.MenuItem.Include(m => m.Category).Include(m => m.SubCategory).SingleOrDefaultAsync(m => m.Id == id);
 
             if (MenuItemVM.MenuItem == null)
             {

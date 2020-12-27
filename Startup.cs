@@ -50,7 +50,7 @@ namespace Warehouse
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
 
-            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
+            //services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
 
             services.AddSession(options =>
             {

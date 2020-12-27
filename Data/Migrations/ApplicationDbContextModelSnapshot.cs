@@ -377,6 +377,7 @@ namespace Warehouse.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
@@ -385,9 +386,14 @@ namespace Warehouse.Data.Migrations
                     b.Property<string>("Ratings")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SubCategoryId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("SubCategoryId");
 
                     b.ToTable("MenuItem");
                 });
@@ -477,7 +483,7 @@ namespace Warehouse.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("OrderHeaders");
+                    b.ToTable("OrderHeader");
                 });
 
             modelBuilder.Entity("Warehouse.Models.ShoppingCart", b =>
@@ -499,6 +505,27 @@ namespace Warehouse.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ShoppingCart");
+                });
+
+            modelBuilder.Entity("Warehouse.Models.SubCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("SubCategory");
                 });
 
             modelBuilder.Entity("Warehouse.Models.ApplicationUser", b =>
@@ -581,6 +608,12 @@ namespace Warehouse.Data.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Warehouse.Models.SubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Warehouse.Models.OrderDetails", b =>
@@ -603,6 +636,15 @@ namespace Warehouse.Data.Migrations
                     b.HasOne("Warehouse.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Warehouse.Models.SubCategory", b =>
+                {
+                    b.HasOne("Warehouse.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -61,14 +61,14 @@
                     <select asp-for="@Model.MenuItem.CategoryId" id="CategoryId" asp-items="Model.Category.ToSelectListItem(Model.MenuItem.CategoryId)" class="form-control"></select>
                 </div>
             </div>
-            @*<div class="form-group row">
+            <div class="form-group row">
                 <div class="col-4">
                     <label asp-for="MenuItem.SubCategoryId" class="col-form-label"></label>
                 </div>
                 <div class="col-8">
                     <select asp-for="@Model.MenuItem.SubCategoryId" name="SubCategoryId" id="SubCategoryId" asp-items="@(new SelectList(string.Empty,"Id","Name"))" class="form-control"></select>
                 </div>
-            </div>*@
+            </div>
             <div class="form-group row">
                 <div class="col-4">
                     <label asp-for="MenuItem.Ratings" class="col-form-label"></label>

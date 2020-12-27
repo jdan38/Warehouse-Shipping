@@ -2,7 +2,7 @@
 
 namespace Warehouse.Data.Migrations
 {
-    public partial class AddSubCattoDatabase : Migration
+    public partial class addSubCategoryToDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace Warehouse.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CatName = table.Column<string>(nullable: false),
+                    SName = table.Column<string>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

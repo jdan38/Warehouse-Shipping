@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <script src="https://kit.fontawesome.com/b279086192.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/jquery-ui.css" />
     <style>
 
         body {
@@ -66,6 +67,7 @@
 
         #log {
             padding-top: 35em;
+        }
     </style>
 </head>
 
@@ -78,24 +80,25 @@
             <div class="container">
 
                 <a class="navbar-brand" style="padding-right:30em;" asp-area="Customer" asp-controller="Home" asp-action="Index">Warehouse Application</a>
-                @*@if (HttpContextAccessor.HttpContext.Session.GetInt32("ssCarCount") != null)
-                {
+                @if (HttpContextAccessor.HttpContext.Session.GetInt32(@SD.ssShoppingCartCount) != null)
+                    {
+                        <div style="color:black">
+                            <a asp-area="Customer" asp-controller="Cart" asp-action="Index" class="nav-link">
+                                @{ 
+                                    var count = HttpContextAccessor.HttpContext.Session.GetInt32(@SD.ssShoppingCartCount);
+                                }
+                                <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                            </a>
+                        </div>
+                     }
+                 else
+                    {
                     <div style="color:black">
                         <a href="#" class="nav-link">
-                            @{ 
-                                var count = HttpContextAccessor.HttpContext.Session.GetInt32("SD.ssShoppingCartCount");
-                            }
-                            <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                            <i class="fas fa-shopping-cart"></i> &nbsp; (0)
                         </a>
                     </div>
-                                }
-                                else
-                                {*@ 
-                <div style="color:black">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-shopping-cart"></i> &nbsp; (0)
-                    </a>
-                </div>
+                    }
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -116,9 +119,11 @@
                                 <a class="nav-link text-light" asp-area="Customer" asp-controller="Customer" asp-action="Index">Customer List</a>
                             </li>
                             @*<li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="Index">Shopping Cart</a>
-                    </li>*@
-
+                <a class="nav-link text-light" asp-area="" asp-controller="ShoppingCart" asp-action="Index">Shopping Cart</a>
+            </li>*@
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="Admin" asp-controller="SubCategory" asp-action="Index">SubCategory</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="Inventory" asp-controller="Inventory" asp-action="Index">Inventory List</a>
                             </li>
@@ -135,15 +140,16 @@
                                 <a class="nav-link text-light" asp-area="Admin" asp-controller="Coupon" asp-action="Index">Coupon List</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <div id="log">
-                                <partial name="_LoginPartial" />
-                            </div>
-                        </li>
+                            <li class="nav-item">
+                                <div id="log">
+                                    <partial name="_LoginPartial" />
+                                </div>
+                            </li>
 
-
+                        
                     </div>
                 </div>
+                                
             </div>
         </nav>
     </header>
@@ -164,6 +170,7 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
         <script src="~/js/jquery-ui.js"></script>
+
     </environment>
     <environment exclude="Development">
         <script src="https://cdn.tiny.cloud/1/lz8x1le5z4dy1bd1su6kdgdf1lpo0tghnf8isejiw3as6278/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>

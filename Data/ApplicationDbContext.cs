@@ -18,13 +18,14 @@ namespace Warehouse.Data
         public DbSet<Inventory> Inventory { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        //public DbSet<SubCategory> SubCategory { get; set; }
+        public DbSet<SubCategory> SubCategory { get; set; }
         public DbSet<MenuItem> MenuItem { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<Coupon> Coupon { get; set; }
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
-        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderHeader> OrderHeader { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
+
 
 
     }
