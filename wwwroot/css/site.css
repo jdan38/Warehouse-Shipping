@@ -125,3 +125,7 @@ body {
         background-color: #545b62;
         color: #fff;
     }
+
+.sidenav a:hover, .dropdown-btn:hover {
+    color: #f1f1f1;
+}

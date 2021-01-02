@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Warehouse.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Warehouse.Utility;
+using Stripe;
 
 namespace Warehouse
 {
@@ -36,6 +38,8 @@ namespace Warehouse
                 .AddDefaultTokenProviders()/*options => options.SignIn.RequireConfirmedAccount = true*/
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddSingleton<IEmailSender, EmailSender>();
+
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -74,6 +78,10 @@ namespace Warehouse
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+           
+
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
+            // DotNet Core 2.2 StripeConfiguration.SetApiKey = Configuration.GetSection("Stripe")["SecretKey"];
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

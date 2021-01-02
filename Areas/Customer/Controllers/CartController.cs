@@ -12,7 +12,7 @@ using Warehouse.Data;
 using Warehouse.Models;
 using Warehouse.Models.ViewModels;
 using Warehouse.Utility;
-//using Stripe;
+using Stripe;
 
 namespace Warehouse.Areas.Customer.Controllers
 {
@@ -43,7 +43,7 @@ namespace Warehouse.Areas.Customer.Controllers
 
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            
+
             var cart = _db.ShoppingCart.Where(c => c.ApplicationUserId == claim.Value);
             if (cart != null)
             {
@@ -61,7 +61,7 @@ namespace Warehouse.Areas.Customer.Controllers
                 }
             }
             detailCart.OrderHeader.OrderTotalOriginal = detailCart.OrderHeader.OrderTotal;
-           
+
             if (HttpContext.Session.GetString(SD.ssCouponCode) != null)
             {
                 detailCart.OrderHeader.CouponCode = HttpContext.Session.GetString(SD.ssCouponCode);
@@ -176,35 +176,35 @@ namespace Warehouse.Areas.Customer.Controllers
             HttpContext.Session.SetInt32(SD.ssShoppingCartCount, 0);
             await _db.SaveChangesAsync();
 
-            //var options = new ChargeCreateOptions
-            //{
-            //    Amount = Convert.ToInt32(detailCart.OrderHeader.OrderTotal * 100),
-            //    Currency = "usd",
-            //    Description = "Order ID : " + detailCart.OrderHeader.Id,
-            //    Source = stripeToken
+            var options = new ChargeCreateOptions
+            {
+                Amount = Convert.ToInt32(detailCart.OrderHeader.OrderTotal * 100),
+                Currency = "usd",
+                Description = "Order ID : " + detailCart.OrderHeader.Id,
+                Source = stripeToken
 
-            //};
-            //var service = new ChargeService();
-            //Charge charge = service.Create(options);
+            };
+            var service = new ChargeService();
+            Charge charge = service.Create(options);
 
-            //if (charge.BalanceTransactionId == null)
-            //{
-            //    detailCart.OrderHeader.PaymentStatus = SD.PaymentStatusRejected;
-            //}
-            //else
-            //{
-            //    detailCart.OrderHeader.TransactionId = charge.BalanceTransactionId;
-            //}
+            if (charge.BalanceTransactionId == null)
+            {
+                detailCart.OrderHeader.PaymentStatus = SD.PaymentStatusRejected;
+            }
+            else
+            {
+                detailCart.OrderHeader.TransactionId = charge.BalanceTransactionId;
+            }
 
-            //if (charge.Status.ToLower() == "succeeded")
-            //{
-            //    detailCart.OrderHeader.PaymentStatus = SD.PaymentStatusApproved;
-            //    detailCart.OrderHeader.Status = SD.StatusSubmitted;
-            //}
-            //else
-            //{
-            //    detailCart.OrderHeader.PaymentStatus = SD.PaymentStatusRejected;
-            //}
+            if (charge.Status.ToLower() == "succeeded")
+            {
+                detailCart.OrderHeader.PaymentStatus = SD.PaymentStatusApproved;
+                detailCart.OrderHeader.Status = SD.StatusSubmitted;
+            }
+            else
+            {
+                detailCart.OrderHeader.PaymentStatus = SD.PaymentStatusRejected;
+            }
 
             await _db.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
