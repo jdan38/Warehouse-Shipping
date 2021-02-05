@@ -37,9 +37,12 @@ namespace Warehouse
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders()/*options => options.SignIn.RequireConfirmedAccount = true*/
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddSingleton<IEmailSender, EmailSender>();
 
+            services.AddScoped<IDbInitializer, DbInitializer>();
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<EmailOptions>(Configuration);
+
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -56,6 +59,14 @@ namespace Warehouse
 
             //services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
 
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = "205105477954458";
+                facebookOptions.AppSecret = "1712336b61cf90d05bc7470a3b1fb0bc";
+
+
+                });
+
             services.AddSession(options =>
             {
                 options.Cookie.IsEssential = true;
@@ -65,7 +76,7 @@ namespace Warehouse
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -79,9 +90,9 @@ namespace Warehouse
                 app.UseHsts();
             }
            
-
-            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
             // DotNet Core 2.2 StripeConfiguration.SetApiKey = Configuration.GetSection("Stripe")["SecretKey"];
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
+            dbInitializer.Initialize();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
