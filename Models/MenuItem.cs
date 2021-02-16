@@ -9,13 +9,13 @@ namespace Warehouse.Models
 {
     public class MenuItem
     {
+
         public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Qyt { get; set; }
-
+        
         public string Ratings { get; set; }
         public enum Rate { NA = 0, OneStar = 1, TwoStar = 2, ThreeStar = 3 }
 

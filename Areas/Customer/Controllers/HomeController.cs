@@ -13,7 +13,7 @@ using Warehouse.Models;
 using Warehouse.Models.ViewModels;
 using Warehouse.Utility;
 
-namespace Spice.Controllers
+namespace Warehouse.Controllers
 {
     [Area("Customer")]
     public class HomeController : Controller

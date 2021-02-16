@@ -3,10 +3,10 @@
 @model RegisterModel
 
 <head>
-        <link rel="stylesheet" type="text/css" href="~/css2/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="~/css2/fontawesome-all.min.css">
-        <link rel="stylesheet" type="text/css" href="~/css2/iofrm-style.css">
-        <link rel="stylesheet" type="text/css" href="~/css2/iofrm-theme15.css">
+    <link rel="stylesheet" type="text/css" href="~/css2/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css2/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css2/iofrm-style.css">
+    <link rel="stylesheet" type="text/css" href="~/css2/iofrm-theme15.css">
 </head>
 
 
@@ -78,6 +78,20 @@
 
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
 
+                        @if (User.IsInRole(SD.ManagerUser))
+                        {
+                            <div class="form-group row">
+                                <div class="other-links">
+                                    <input type="radio" name="rdUserRole" value="@SD.Hr" checked /> @SD.Hr
+                                    <input type="radio" name="rdUserRole" value="@SD.Packer" checked /> @SD.Packer
+                                    <input type="radio" name="rdUserRole" value="@SD.Sales" checked /> @SD.Sales
+                                    <input type="radio" name="rdUserRole" value="@SD.ShippingandReciving" checked /> @SD.ShippingandReciving
+                                    <input type="radio" name="rdUserRole" value="@SD.OrderPuller" checked /> @SD.OrderPuller
+                                    <input type="radio" name="rdUserRole" value="@SD.ManagerUser" checked /> @SD.ManagerUser
+                                </div>
+                            </div>
+                        }
+
                         <div class="form-button">
                             <button id="submit" type="submit" class="ibtn">Register</button>
                         </div>
@@ -91,22 +105,15 @@
         </div>
     </div>
 </div>
+
+
 <script src="~/js2/jquery.min.js"></script>
 <script src="~/js2/popper.min.js"></script>
 <script src="~/js2/bootstrap.min.js"></script>
 <script src="~/js2/main.js"></script>
 
 
-@if (User.IsInRole(SD.ManagerUser))
-{
-    <div class="form-group row">
-        <div class="other-links">
-            <input type="radio" name="rdUserRole" value="@SD.KitchenUser" checked /> @SD.KitchenUser
-            <input type="radio" name="rdUserRole" value="@SD.FrontDeskUser" checked /> @SD.FrontDeskUser
-            <input type="radio" name="rdUserRole" value="@SD.ManagerUser" checked /> @SD.ManagerUser
-        </div>
-    </div>
-}
+
 
 
 

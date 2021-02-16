@@ -12,8 +12,11 @@ namespace Warehouse.Utility
 
 
         public const string ManagerUser = "Manager";
-        public const string KitchenUser = "Kitchen";
-        public const string FrontDeskUser = "FrontDesk";
+        public const string Hr = "Hr";
+        public const string Packer = "Packer";
+        public const string OrderPuller = "OrderPuller";
+        public const string ShippingandReciving = "Shipping and Reciving";
+        public const string Sales = "Sales";
         public const string CustomerEndUser = "Customer";
 
         public const string ssShoppingCartCount = "ssCartCount";

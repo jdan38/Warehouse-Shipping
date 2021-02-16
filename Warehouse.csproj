@@ -6,6 +6,96 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20210216032954_AddInven2.cs" />
+    <Compile Remove="Data\Migrations\20210216032954_AddInven2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js3\bootstrap.min.js" />
+    <None Include="wwwroot\js3\countdown.js" />
+    <None Include="wwwroot\js3\jquery-ui.min.js" />
+    <None Include="wwwroot\js3\jquery.meanmenu.js" />
+    <None Include="wwwroot\js3\jquery.nivo.slider.pack.js" />
+    <None Include="wwwroot\js3\jquery.simpleLens.min.js" />
+    <None Include="wwwroot\js3\load-more.js" />
+    <None Include="wwwroot\js3\main.js" />
+    <None Include="wwwroot\js3\owl.carousel.min.js" />
+    <None Include="wwwroot\js3\plugins.js" />
+    <None Include="wwwroot\js3\vendor\jquery-1.12.3.min.js" />
+    <None Include="wwwroot\js3\vendor\modernizr-2.8.3.min.js" />
+    <None Include="wwwroot\libs\bootstrap-colorpicker\bootstrap-colorpicker.min.js" />
+    <None Include="wwwroot\libs\bootstrap-datepicker\bootstrap-datepicker.min.js" />
+    <None Include="wwwroot\libs\bootstrap-daterangepicker\daterangepicker.js" />
+    <None Include="wwwroot\libs\bootstrap-maxlength\bootstrap-maxlength.min.js" />
+    <None Include="wwwroot\libs\bootstrap-tagsinput\bootstrap-tagsinput.min.js" />
+    <None Include="wwwroot\libs\bootstrap-timepicker\bootstrap-timepicker.min.js" />
+    <None Include="wwwroot\libs\bootstrap-touchspin\jquery.bootstrap-touchspin.min.js" />
+    <None Include="wwwroot\libs\chart-js\Chart.bundle.min.js" />
+    <None Include="wwwroot\libs\chartist\chartist-plugin-tooltip.min.js" />
+    <None Include="wwwroot\libs\chartist\chartist.min.js" />
+    <None Include="wwwroot\libs\custombox\custombox.min.js" />
+    <None Include="wwwroot\libs\datatables\buttons.bootstrap4.min.js" />
+    <None Include="wwwroot\libs\datatables\buttons.flash.min.js" />
+    <None Include="wwwroot\libs\datatables\buttons.html5.min.js" />
+    <None Include="wwwroot\libs\datatables\buttons.print.min.js" />
+    <None Include="wwwroot\libs\datatables\dataTables.bootstrap4.js" />
+    <None Include="wwwroot\libs\datatables\dataTables.buttons.min.js" />
+    <None Include="wwwroot\libs\datatables\dataTables.keyTable.min.js" />
+    <None Include="wwwroot\libs\datatables\dataTables.responsive.min.js" />
+    <None Include="wwwroot\libs\datatables\dataTables.select.min.js" />
+    <None Include="wwwroot\libs\datatables\jquery.dataTables.min.js" />
+    <None Include="wwwroot\libs\datatables\responsive.bootstrap4.min.js" />
+    <None Include="wwwroot\libs\dropify\dropify.min.js" />
+    <None Include="wwwroot\libs\flot-charts\jquery.flot.crosshair.js" />
+    <None Include="wwwroot\libs\flot-charts\jquery.flot.js" />
+    <None Include="wwwroot\libs\flot-charts\jquery.flot.orderBars.js" />
+    <None Include="wwwroot\libs\flot-charts\jquery.flot.pie.js" />
+    <None Include="wwwroot\libs\flot-charts\jquery.flot.resize.js" />
+    <None Include="wwwroot\libs\flot-charts\jquery.flot.selection.js" />
+    <None Include="wwwroot\libs\flot-charts\jquery.flot.stack.js" />
+    <None Include="wwwroot\libs\flot-charts\jquery.flot.time.js" />
+    <None Include="wwwroot\libs\flot-charts\jquery.flot.tooltip.min.js" />
+    <None Include="wwwroot\libs\fullcalendar\fullcalendar.min.js" />
+    <None Include="wwwroot\libs\gmaps\gmaps.min.js" />
+    <None Include="wwwroot\libs\hopscotch\hopscotch.min.js" />
+    <None Include="wwwroot\libs\ion-rangeslider\ion.rangeSlider.min.js" />
+    <None Include="wwwroot\libs\isotope\isotope.pkgd.min.js" />
+    <None Include="wwwroot\libs\jquery-countdown\jquery.countdown.min.js" />
+    <None Include="wwwroot\libs\jquery-knob\jquery.knob.min.js" />
+    <None Include="wwwroot\libs\jquery-mask-plugin\jquery.mask.min.js" />
+    <None Include="wwwroot\libs\jquery-quicksearch\jquery.quicksearch.min.js" />
+    <None Include="wwwroot\libs\jquery-sparkline\jquery.sparkline.min.js" />
+    <None Include="wwwroot\libs\jquery-tabledit\jquery.tabledit.min.js" />
+    <None Include="wwwroot\libs\jquery-ui\jquery-ui.min.js" />
+    <None Include="wwwroot\libs\jquery-vectormap\jquery-jvectormap-1.2.2.min.js" />
+    <None Include="wwwroot\libs\jquery-vectormap\jquery-jvectormap-au-mill-en.js" />
+    <None Include="wwwroot\libs\jquery-vectormap\jquery-jvectormap-ca-lcc-en.js" />
+    <None Include="wwwroot\libs\jquery-vectormap\jquery-jvectormap-uk-mill-en.js" />
+    <None Include="wwwroot\libs\jquery-vectormap\jquery-jvectormap-us-merc-en.js" />
+    <None Include="wwwroot\libs\jquery-vectormap\jquery-jvectormap-world-mill-en.js" />
+    <None Include="wwwroot\libs\katex\katex.min.js" />
+    <None Include="wwwroot\libs\magnific-popup\jquery.magnific-popup.min.js" />
+    <None Include="wwwroot\libs\moment\moment.js" />
+    <None Include="wwwroot\libs\morris-js\morris.min.js" />
+    <None Include="wwwroot\libs\multiselect\jquery.multi-select.js" />
+    <None Include="wwwroot\libs\parsleyjs\parsley.min.js" />
+    <None Include="wwwroot\libs\pdfmake\pdfmake.min.js" />
+    <None Include="wwwroot\libs\pdfmake\vfs_fonts.js" />
+    <None Include="wwwroot\libs\peity\jquery.peity.min.js" />
+    <None Include="wwwroot\libs\quill\quill.min.js" />
+    <None Include="wwwroot\libs\raphael\raphael.min.js" />
+    <None Include="wwwroot\libs\rwd-table\rwd-table.min.js" />
+    <None Include="wwwroot\libs\select2\select2.min.js" />
+    <None Include="wwwroot\libs\sweetalert2\sweetalert2.min.js" />
+    <None Include="wwwroot\libs\switchery\switchery.min.js" />
+    <None Include="wwwroot\libs\tablesaw\tablesaw.js" />
+    <None Include="wwwroot\libs\toastr\toastr.min.js" />
+    <None Include="wwwroot\libs\treeview\jstree.min.js" />
+    <None Include="wwwroot\libs\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
+    <None Include="wwwroot\libs\x-editable\bootstrap-editable.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
@@ -16,7 +106,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="SendGrid" Version="9.22.0" />
     <PackageReference Include="Stripe.net" Version="39.31.0" />
     <PackageReference Include="System.Collections" Version="4.3.0" />

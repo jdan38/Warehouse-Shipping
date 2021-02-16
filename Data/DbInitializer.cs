@@ -39,8 +39,11 @@ namespace Warehouse.Data
             if (_db.Roles.Any(r => r.Name == SD.ManagerUser)) return;
 
             _roleManager.CreateAsync(new IdentityRole(SD.ManagerUser)).GetAwaiter().GetResult();
-            _roleManager.CreateAsync(new IdentityRole(SD.FrontDeskUser)).GetAwaiter().GetResult();
-            _roleManager.CreateAsync(new IdentityRole(SD.KitchenUser)).GetAwaiter().GetResult();
+            _roleManager.CreateAsync(new IdentityRole(SD.Hr)).GetAwaiter().GetResult();
+            _roleManager.CreateAsync(new IdentityRole(SD.Sales)).GetAwaiter().GetResult();
+            _roleManager.CreateAsync(new IdentityRole(SD.OrderPuller)).GetAwaiter().GetResult();
+            _roleManager.CreateAsync(new IdentityRole(SD.Packer)).GetAwaiter().GetResult();
+            _roleManager.CreateAsync(new IdentityRole(SD.ShippingandReciving)).GetAwaiter().GetResult();
             _roleManager.CreateAsync(new IdentityRole(SD.CustomerEndUser)).GetAwaiter().GetResult();
 
             _userManager.CreateAsync(new ApplicationUser

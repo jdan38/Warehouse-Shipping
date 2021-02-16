@@ -22,7 +22,14 @@ namespace Warehouse.Areas.Controllers
             return View(await _db.Employees.ToListAsync());
         }
 
-       // Details
+        //Dashboard 
+        public async Task<IActionResult> Dash()
+        {
+
+            return View(await _db.Employees.ToListAsync());
+        }
+
+        // Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

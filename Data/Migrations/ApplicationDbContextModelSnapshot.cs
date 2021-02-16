@@ -341,10 +341,16 @@ namespace Warehouse.Data.Migrations
 
             modelBuilder.Entity("Warehouse.Models.Inventory", b =>
                 {
-                    b.Property<int>("IvenId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ItemName")
                         .HasColumnType("nvarchar(max)");
@@ -352,12 +358,9 @@ namespace Warehouse.Data.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("Qyt")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("IvenId");
-
-                    b.ToTable("Inventory");
+                    b.ToTable("Iventory");
                 });
 
             modelBuilder.Entity("Warehouse.Models.MenuItem", b =>

@@ -66,7 +66,7 @@ namespace Warehouse.Areas.Customer.Controllers
                 Orders = new List<OrderDetailsViewModel>()
             };
 
-            List<OrderDetailsViewModel> orderList = new List<OrderDetailsViewModel>();
+            //List<OrderDetailsViewModel> orderList = new List<OrderDetailsViewModel>();
 
             List<OrderHeader> OrderHeaderList = await _db.OrderHeader.Include(o => o.ApplicationUser).Where(u => u.UserId == claim.Value).ToListAsync();
 
@@ -77,7 +77,7 @@ namespace Warehouse.Areas.Customer.Controllers
                     OrderHeader = item,
                     OrderDetails = await _db.OrderDetails.Where(o => o.OrderId == item.Id).ToListAsync()
                 };
-                orderList.Add(individual);
+                orderListVM.Orders.Add(individual);
             }
 
             var count = orderListVM.Orders.Count;
@@ -93,10 +93,10 @@ namespace Warehouse.Areas.Customer.Controllers
                 urlParam = "/Customer/Order/OrderHistory?productPage=:"
             };
 
-            return View(orderList);
+            return View(orderListVM);
         }
 
-        [Authorize(Roles = SD.KitchenUser + "," + SD.ManagerUser)]
+        [Authorize(Roles = SD.Packer + "," + SD.ManagerUser +"," + SD.OrderPuller)]
         public async Task<IActionResult> ManageOrder(int productPage = 1)
         {
 
@@ -136,7 +136,7 @@ namespace Warehouse.Areas.Customer.Controllers
 
 
 
-        [Authorize(Roles = SD.KitchenUser + "," + SD.ManagerUser)]
+        [Authorize(Roles = SD.OrderPuller + "," + SD.ManagerUser)]
         public async Task<IActionResult> OrderPrepare(int OrderId)
         {
             OrderHeader orderHeader = await _db.OrderHeader.FindAsync(OrderId);
@@ -146,7 +146,7 @@ namespace Warehouse.Areas.Customer.Controllers
         }
 
 
-        [Authorize(Roles = SD.KitchenUser + "," + SD.ManagerUser)]
+        [Authorize(Roles = SD.Packer + "," + SD.ManagerUser)]
         public async Task<IActionResult> OrderReady(int OrderId)
         {
             OrderHeader orderHeader = await _db.OrderHeader.FindAsync(OrderId);
@@ -161,7 +161,7 @@ namespace Warehouse.Areas.Customer.Controllers
         }
 
 
-        [Authorize(Roles = SD.KitchenUser + "," + SD.ManagerUser)]
+        [Authorize(Roles = SD.Sales + "," + SD.ManagerUser)]
         public async Task<IActionResult> OrderCancel(int OrderId)
         {
             OrderHeader orderHeader = await _db.OrderHeader.FindAsync(OrderId);
@@ -267,7 +267,7 @@ namespace Warehouse.Areas.Customer.Controllers
             return View(orderListVM);
         }
 
-        [Authorize(Roles = SD.FrontDeskUser + "," + SD.ManagerUser)]
+        [Authorize(Roles = SD.ShippingandReciving + "," + SD.ManagerUser)]
         [HttpPost]
         [ActionName("OrderPickup")]
         public async Task<IActionResult> OrderPickupPost(int orderId)

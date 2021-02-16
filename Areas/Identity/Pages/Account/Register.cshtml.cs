@@ -92,7 +92,6 @@ namespace Warehouse.Areas.Identity.Pages.Account
             string role = Request.Form["rdUserRole"].ToString();
 
             returnUrl = returnUrl ?? Url.Content("~/");
-
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
@@ -111,66 +110,88 @@ namespace Warehouse.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                   
 
-                        if (role == SD.KitchenUser)
-                        {
-                            await _userManager.AddToRoleAsync(user, SD.KitchenUser);
-                        }
-                        else
-                        {
-                            if (role == SD.FrontDeskUser)
-                            {
-                                await _userManager.AddToRoleAsync(user, SD.FrontDeskUser);
-                            }
-                            else
-                            {
-                                if (role == SD.ManagerUser)
-                                {
-                                    await _userManager.AddToRoleAsync(user, SD.ManagerUser);
-                                }
-                                else
-                                {
-                                    await _userManager.AddToRoleAsync(user, SD.CustomerEndUser);
-                                    await _signInManager.SignInAsync(user, isPersistent: false);
-                                    return LocalRedirect(returnUrl);
-                            }
-                        }
-                     }
-
-                    return RedirectToAction("Index", "User", new { area = "Admin" });
-
-                    _logger.LogInformation("User created a new account with password.");
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    if (role == SD.Hr)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        await _userManager.AddToRoleAsync(user, SD.Hr);
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        if (role == SD.Sales)
+                        {
+                            await _userManager.AddToRoleAsync(user, SD.Sales);
+                        }
+                        else
+                        {
+                            if (role == SD.OrderPuller)
+                            {
+                                await _userManager.AddToRoleAsync(user, SD.OrderPuller);
+                            }
+                            else
+                            {
+                                if (role == SD.Packer)
+                                {
+                                    await _userManager.AddToRoleAsync(user, SD.Packer);
+                                }
+                                else
+                                {
+                                    if (role == SD.ShippingandReciving)
+                                    {
+                                        await _userManager.AddToRoleAsync(user, SD.ShippingandReciving);
+                                    }
+                                    else
+                                    {
+                                        if (role == SD.ManagerUser)
+                                        {
+                                            await _userManager.AddToRoleAsync(user, SD.ManagerUser);
+                                        }
+                                        else
+                                        {
+                                            await _userManager.AddToRoleAsync(user, SD.CustomerEndUser);
+                                            await _signInManager.SignInAsync(user, isPersistent: false);
+                                            return LocalRedirect(returnUrl);
+                                        }
+                                    }
+                                }
+
+                                return RedirectToAction("Index", "User", new { area = "Admin" });
+
+                                _logger.LogInformation("User created a new account with password.");
+
+                                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                                var callbackUrl = Url.Page(
+                                    "/Account/ConfirmEmail",
+                                    pageHandler: null,
+                                    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                                    protocol: Request.Scheme);
+
+                                await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                                if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                                {
+                                    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                                }
+                                else
+                                {
+                                    await _signInManager.SignInAsync(user, isPersistent: false);
+
+                                }
+                            }
+                            foreach (var error in result.Errors)
+                            {
+                                ModelState.AddModelError(string.Empty, error.Description);
+                            }
+                        }
+
+                        // If we got this far, something failed, redisplay form
 
                     }
                 }
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
-                }
-
-                // If we got this far, something failed, redisplay form
-                return Page();
             }
+            return Page();
         }
     }
+}
+        
