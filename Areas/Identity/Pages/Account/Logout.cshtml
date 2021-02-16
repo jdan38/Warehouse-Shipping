@@ -4,15 +4,36 @@
     ViewData["Title"] = "Log out";
 }
 
-<header>
-    <h1>@ViewData["Title"]</h1>
-    
-</header>
 
 <br />
 <br />
-<div class="border backgroundWhite">
-    <div class="row">
-        <p>You have successfully logged out of the application.</p>
+<body>
+    <div class="form-body">
+        <div class="website-logo">
+            <a href="index.html">
+                <div class="logo">
+                    <img class="logo-size" src="images/logo-light.svg" alt="">
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                    <H2>You have successfully logged out of the application.</H2>
+                    
+                </div>
+            </div>
+            <div style="height:350px;"></div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="page-links">
+                        <a asp-area="Identity" asp-page="/Account/Login">Login</a><a asp-area="Identity" asp-page="/Account/Register" class="active">Register</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
+</body>
+
