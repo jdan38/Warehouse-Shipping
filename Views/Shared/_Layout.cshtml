@@ -14,45 +14,20 @@
 
     <environment include="Development">
         <!--    Beginning  of front end css-->
-        <!-- favicon -->
-        <link rel="shortcut icon" type="~/image/x-icon" href="~/images/favicon.ico">
-
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
-        <!-- google fonts -->
-        <link href='https://fonts.googleapis.com/css?family=Lato:400,900,700,300' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-        <!-- all css here -->
-        <!-- bootstrap v3.3.6 css -->
-        <link rel="stylesheet" href="~/css/bootstrap.min.css">
-        <!-- animate css -->
+        <link rel="stylesheet" href="~/css/slick.min.css">
+        <link rel="stylesheet" href="~/css/bootstrap-grid.css">
+        <link rel="stylesheet" href="~/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/css/nice-select.css">
         <link rel="stylesheet" href="~/css/animate.css">
-        <!-- pe-icon-7-stroke -->
-        <link rel="stylesheet" href="~/css/materialdesignicons.min.css">
-        <!-- pe-icon-7-stroke -->
-        <link rel="stylesheet" href="~/css/jquery.simpleLens.css">
-        <!-- jquery-ui.min css -->
-        <link rel="stylesheet" href="~/css/jquery-ui.min.css">
-        <!-- meanmenu css -->
-        <link rel="stylesheet" href="~/css/meanmenu.min.css">
-        <!-- nivo.slider css -->
-        <link rel="stylesheet" href="~/css/nivo-slider.css">
-        <!-- owl.carousel css -->
-        <link rel="stylesheet" href="~/css/owl.carousel.css">
-        <!-- style css -->
         <link rel="stylesheet" href="~/css/style.css">
-        <!-- responsive css -->
-        <link rel="stylesheet" href="~/css/responsive.css">
-        <!-- modernizr js -->
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
         <!------End of Front end css -->
-        <link rel="shortcut icon" href="~/images/favicon.ico">
+        <link rel="shortcut icon" href="~/images/auto/car-17.png">
         <link href="~/css2/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
         <link href="~/css2/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="~/css2/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
-        <link rel="shortcut icon" href="~/images/favicon.ico">
+        <link rel="shortcut icon" href="~/images/auto/car-17.png">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/jquery-ui.css" />
         <link rel="stylesheet" href="~/data/ajax_roots.json" />
@@ -141,45 +116,71 @@
 </head>
 
 
-<body data-layout="horizontal" data-topbar="dark">>
+<body data-layout="horizontal" data-topbar="dark">
  
     <header>
 
 
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-           
 
-            <a class="navbar-brand" style="padding-right:30em; padding-left:15em;" asp-area="Customer" asp-controller="Home" asp-action="Index">Warehouse Application</a>
-            @if (User.IsInRole(SD.CustomerEndUser) )
-            {
-                @if (HttpContextAccessor.HttpContext.Session.GetInt32(@SD.ssShoppingCartCount) != null)
+            @*<nav class="nav-menu">*@
+
+            @*<div class="header-menu">*@
+            <ul class="nav-list">
+                <a style="padding-right:25em;" asp-area="Customer" asp-controller="Home" asp-action="Index">Warehouse Application</a>
+                
+                    <li class="dropdown">
+                        <a href="#">Home <i class="fa drop-arrow" aria-hidden="true"></i></a>
+                        <ul>
+                            <li class="active"><a href="index.html">Home One</a></li>
+                            <li class="active"><a href="home-two.html">Home Two</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li class="dropdown">
+                        <a href="#">Pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="news.html">News</a></li>
+                            <li><a href="404.html">Page error 404</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contacts.html">Contacts</a></li>
+
+     
+                @if (User.IsInRole(SD.CustomerEndUser))
                 {
-                    <div style="color:black">
-                        <a asp-area="Customer" asp-controller="Cart" asp-action="Index" class="nav-link">
-                            @{
-                                var count = HttpContextAccessor.HttpContext.Session.GetInt32(@SD.ssShoppingCartCount);
-                            }
-                            <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
-                        </a>
-                    </div>
+                    @if (HttpContextAccessor.HttpContext.Session.GetInt32(@SD.ssShoppingCartCount) != null)
+                    {
+                        <div style="color:black">
+                            <a asp-area="Customer" asp-controller="Cart" asp-action="Index" class="nav-link">
+                                @{
+                                    var count = HttpContextAccessor.HttpContext.Session.GetInt32(@SD.ssShoppingCartCount);
                                 }
-                                else
-                                {
-                    <div style="color:black">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-shopping-cart"></i> &nbsp; (0)
-                        </a>
-                    </div>
-                                }
+                                <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="color:black">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-shopping-cart"></i> &nbsp; (0)
+                            </a>
+                        </div>
+                    }
 
-              }
+                }
+
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect"  data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <img src="~/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
+                    <span class="pro-user-name ml-1">
+                        Nowak <i class="mdi mdi-chevron-down"></i>
+                    </span>
+                </a>
                 <ul class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="~/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
-                        <span class="pro-user-name ml-1">
-                            Nowak <i class="mdi mdi-chevron-down"></i>
-                        </span>
-                    </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <!-- item-->
                         <div class="dropdown-header noti-title">
@@ -218,90 +219,95 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+            </ul>
+        </nav>
+        @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.OrderPuller) || User.IsInRole(SD.Sales) || User.IsInRole(SD.ShippingandReciving))
+        {
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="sidenav">
 
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <div class="sidenav">
-
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.OrderPuller) || User.IsInRole(SD.Sales) || User.IsInRole(SD.ShippingandReciving))
+                    {
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Order" asp-action="OrderHistory">Order History</a>
                         </li>
-                        @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.OrderPuller) || User.IsInRole(SD.Sales) || User.IsInRole(SD.ShippingandReciving))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Customer" asp-controller="Order" asp-action="OrderHistory">Order History</a>
-                            </li>
-                        }
-                        @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.Packer) || User.IsInRole(SD.OrderPuller) || User.IsInRole(SD.ShippingandReciving))
-                        {
+                    }
+                    @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.Packer) || User.IsInRole(SD.OrderPuller) || User.IsInRole(SD.ShippingandReciving))
+                    {
 
-                            <li class="nav-item dropdown dropright">
-                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Order</a>
-                                <div class="dropdown-menu-right" aria-labelledby="navbarDropDownMenuLink">
-                                    @if (User.IsInRole(SD.OrderPuller) || User.IsInRole(SD.ManagerUser))
-                                    {
-                                        <a class="dropdown-item" asp-action="ManageOrder" asp-controller="Order" asp-area="Customer">Manage Order</a>
-                                    }
-                                    @if (User.IsInRole(SD.ShippingandReciving) || User.IsInRole(SD.ManagerUser))
-                                    {
-                                        <a class="dropdown-item" asp-action="OrderPickup" asp-controller="Order" asp-area="Customer">Order Shipped</a>
-                                    }
-                                </div>
-
-                            </li>
-                        }
-                        @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.Sales))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Coupon" asp-action="Index">Coupon List</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Customer" asp-controller="Customer" asp-action="Index">Customer List</a>
-                            </li>
-                        }
-                        @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.Hr))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Employee" asp-controller="Employees" asp-action="Dash">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Employee" asp-controller="Employees" asp-action="Index">Employee List</a>
-                            </li>
-
-
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Admin" asp-controller="SubCategory" asp-action="Index">SubCategory</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Inventory" asp-controller="Inventory" asp-action="Index">Inventory List</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Admin" asp-controller="MenuItem" asp-action="Index">Menu Items</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Admin" asp-controller="Category" asp-action="Index">Categort List</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="Admin" asp-controller="User" asp-action="Index">Users</a>
-                            </li>
-
-                        }
-
-
-
-
-                        <li class="nav-item">
-                            <div id="log">
-                                <partial name="_LoginPartial" />
+                        <li class="nav-item dropdown dropright">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Order</a>
+                            <div class="dropdown-menu-right" aria-labelledby="navbarDropDownMenuLink">
+                                @if (User.IsInRole(SD.OrderPuller) || User.IsInRole(SD.ManagerUser))
+                                {
+                                    <a class="dropdown-item" asp-action="ManageOrder" asp-controller="Order" asp-area="Customer">Manage Order</a>
+                                }
+                                @if (User.IsInRole(SD.ShippingandReciving) || User.IsInRole(SD.ManagerUser))
+                                {
+                                    <a class="dropdown-item" asp-action="OrderPickup" asp-controller="Order" asp-area="Customer">Order Shipped</a>
+                                }
                             </div>
+
+                        </li>
+                    }
+                    @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.Sales))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Coupon" asp-action="Index">Coupon List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Customer" asp-action="Index">Customer List</a>
+                        </li>
+                    }
+                    @if (User.IsInRole(SD.ManagerUser) || User.IsInRole(SD.Hr))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Employee" asp-controller="Employees" asp-action="Dash">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Employee" asp-controller="Employees" asp-action="Index">Employee List</a>
                         </li>
 
 
-                    </div>
-                </div>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="SubCategory" asp-action="Index">SubCategory</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Inventory" asp-controller="Inventory" asp-action="Index">Inventory List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="MenuItem" asp-action="Index">Menu Items</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="Category" asp-action="Index">Categort List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Admin" asp-controller="User" asp-action="Index">Users</a>
+                        </li>
 
-                @*</div>*@
-            </nav>
+                    }
+
+
+
+
+                    <li class="nav-item">
+                        <div id="log">
+                            <partial name="_LoginPartial" />
+                        </div>
+                    </li>
+
+
+                </div>
+            </div>
+        }
+        @*</div>*@
+        @*</nav>*@
+
     </header>
+
     <div style="padding-left:10em;">
         <main role="main" @*class="pb-3"*@>
             @RenderBody()
@@ -318,6 +324,14 @@
    
 
 <environment include="Development">
+    <!--=================== TO TOP END ===================-->
+    <!--==================== SCRIPT	====================-->
+    <script src="assets/js/jquery-2.2.4.min.js"></script>
+    <script src="assets/js/slick.min.js"></script>
+    <script src="assets/js/jquery.nice-select.js"></script>
+    <script src="assets/js/wow.js"></script>
+    <script src="assets/js/lazyload.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
 
     <!-- Vendor js -->
     <script src="~/js/vendor.min.js"></script>
@@ -359,9 +373,9 @@
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>*@
     <script src="https://kit.fontawesome.com/b279086192.js" crossorigin="anonymous"></script>
 
 

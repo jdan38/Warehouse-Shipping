@@ -11,6 +11,50 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\img\advantages-1.svg" />
+    <None Include="wwwroot\img\advantages-2.svg" />
+    <None Include="wwwroot\img\advantages-3.svg" />
+    <None Include="wwwroot\img\advantages-4.svg" />
+    <None Include="wwwroot\img\advantages-about-1.svg" />
+    <None Include="wwwroot\img\advantages-about-2.svg" />
+    <None Include="wwwroot\img\advantages-about-3.svg" />
+    <None Include="wwwroot\img\advantages-about-4.svg" />
+    <None Include="wwwroot\img\advantages-dark-1.svg" />
+    <None Include="wwwroot\img\advantages-dark-2.svg" />
+    <None Include="wwwroot\img\advantages-dark-3.svg" />
+    <None Include="wwwroot\img\bg-effect-header.svg" />
+    <None Include="wwwroot\img\bg-header.svg" />
+    <None Include="wwwroot\img\bg-slider-2.svg" />
+    <None Include="wwwroot\img\bg-slider-3.svg" />
+    <None Include="wwwroot\img\bg-slider.svg" />
+    <None Include="wwwroot\img\client-1.svg" />
+    <None Include="wwwroot\img\client-2.svg" />
+    <None Include="wwwroot\img\client-3.svg" />
+    <None Include="wwwroot\img\client-4.svg" />
+    <None Include="wwwroot\img\client-5.svg" />
+    <None Include="wwwroot\img\client-6.svg" />
+    <None Include="wwwroot\img\cont-icon-1.svg" />
+    <None Include="wwwroot\img\cont-icon-2.svg" />
+    <None Include="wwwroot\img\cont-icon-3.svg" />
+    <None Include="wwwroot\img\dark-adv-effect.svg" />
+    <None Include="wwwroot\img\dark-categ-effect.svg" />
+    <None Include="wwwroot\img\dark-client-1.svg" />
+    <None Include="wwwroot\img\dark-client-2.svg" />
+    <None Include="wwwroot\img\dark-client-3.svg" />
+    <None Include="wwwroot\img\dark-client-4.svg" />
+    <None Include="wwwroot\img\dark-client-5.svg" />
+    <None Include="wwwroot\img\dark-client-6.svg" />
+    <None Include="wwwroot\img\dark-effect-banner.svg" />
+    <None Include="wwwroot\img\dark-effect-img.svg" />
+    <None Include="wwwroot\img\effect-bg-about.svg" />
+    <None Include="wwwroot\img\effect-bg-feedback.svg" />
+    <None Include="wwwroot\img\effect-dark-slider.svg" />
+    <None Include="wwwroot\img\effect-section-banner.svg" />
+    <None Include="wwwroot\img\effect-subscribe-img.svg" />
+    <None Include="wwwroot\img\logo-white.svg" />
+    <None Include="wwwroot\img\logo.svg" />
+    <None Include="wwwroot\img\loop-icon.svg" />
+    <None Include="wwwroot\img\subscribe-effect.svg" />
     <None Include="wwwroot\js3\bootstrap.min.js" />
     <None Include="wwwroot\js3\countdown.js" />
     <None Include="wwwroot\js3\jquery-ui.min.js" />
@@ -93,6 +137,7 @@
     <None Include="wwwroot\libs\treeview\jstree.min.js" />
     <None Include="wwwroot\libs\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
     <None Include="wwwroot\libs\x-editable\bootstrap-editable.min.js" />
+    <None Include="wwwroot\php\contact.php" />
   </ItemGroup>
 
   <ItemGroup>
