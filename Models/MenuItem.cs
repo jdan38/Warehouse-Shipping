@@ -15,6 +15,8 @@ namespace Warehouse.Models
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
+
+        //public string Favorite { get; set; }
         
         public string Ratings { get; set; }
         public enum Rate { NA = 0, OneStar = 1, TwoStar = 2, ThreeStar = 3 }
@@ -35,6 +37,12 @@ namespace Warehouse.Models
 
         [Range(1, int.MaxValue, ErrorMessage = " Price should be greater than ${1}")]
         public double Price { get; set; }
+
+        //public double OldPrice { get; set; }
+
+        //public bool TopSale { get; set; }
+
+        //public bool InStock { get; set; }
 
 
     }
